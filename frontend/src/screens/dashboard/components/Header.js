@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Button, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	let headerStyle =  {
@@ -16,7 +17,9 @@ const Header = () => {
 		<Row>
 			<Col xs={12}>
 				<header style={headerStyle}>
-					<Button style={logoutButtonStyle}>Logout</Button>
+					<Link to='/'>
+						<Button style={logoutButtonStyle}>Logout</Button>
+					</Link>
 				</header>
 			</Col>
 		</Row>

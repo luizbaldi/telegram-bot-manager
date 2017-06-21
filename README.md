@@ -26,3 +26,6 @@ https://picoledelimao.github.io/blog/2016/01/22/creating-a-telegram-bot-in-nodej
 
 Setting up restful api with node:
 https://www.codementor.io/olatundegaruba/nodejs-restful-apis-in-10-minutes-q0sgsfhbd
+
+Creating routes:
+https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
