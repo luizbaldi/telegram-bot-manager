@@ -1,0 +1,16 @@
+.login-container {
+	background-color: #30b6f8;
+	height: 100%;
+	width: 100%;
+}
+
+.login-container .panel {
+	width: 300px;
+	height: 250px;
+}
+
+.vertically-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
