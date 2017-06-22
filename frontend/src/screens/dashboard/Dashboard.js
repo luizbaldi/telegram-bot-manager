@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import ListChats from './components/ListChats';
 import CurrentChat from './components/CurrentChat';
+import { Row, Col } from 'react-bootstrap';
+import './style/dashboard.css';
 
 class Dashboard extends Component {
 	constructor(props) {

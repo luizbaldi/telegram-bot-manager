@@ -1,16 +1,17 @@
 .login-container {
 	background-color: #30b6f8;
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 }
 
 .login-container .panel {
-	width: 300px;
-	height: 250px;
+	width: 30%;
+	height: 20vh;
+	display: inline-block;
 }
 
 .vertically-center {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+    position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }

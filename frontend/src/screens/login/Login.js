@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { browserHistory } from 'react-dom';
+import { Button, Panel } from 'react-bootstrap';
 import './style/login.css';
 
-class login extends Component {
+class Login extends Component {
 	constructor(props) {
 		super(props);
 
@@ -15,14 +16,17 @@ class login extends Component {
 	}
 	render() {
 		return (
-			<div className="login-container vertically-center">
-				<div className="panel vertically-center text-center">
-					<p>Telegram Bot Manager</p>
-					<button onClick={this.doFacebookLogin}>Acesss Via Facebook</button>
-				</div>
+			<div className="login-container text-center">
+				<Panel className="vertically-center text-center">
+					<h4>Telegram Bot Manager</h4>
+					<hr />
+					<Button bsSize="large" bsStyle="primary" onClick={this.doFacebookLogin}>
+						Acesss Via Facebook
+					</Button>
+				</Panel>
 			</div>
 		);
 	};
 };
 
-export default login;
+export default Login;

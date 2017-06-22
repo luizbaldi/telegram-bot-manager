@@ -1,0 +1,13 @@
+header {
+	height: 10vh;
+	background-color: #30b6f8;
+}
+
+.list-chats {
+	height: 90vh;
+}
+
+.current-chat {
+	background-color: #e0e0e0;
+	height: 90vh;
+}

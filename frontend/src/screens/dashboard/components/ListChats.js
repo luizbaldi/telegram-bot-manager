@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 class ListChats extends Component {
 	constructor(props) {
@@ -8,7 +8,9 @@ class ListChats extends Component {
 	render() {
 		return (
 			<Col xs={3}>
-				<p>No chats yet</p>
+				<div className="list-chats">
+					<p>No chats yet</p>
+				</div>
 			</Col>
 		)
 	}
