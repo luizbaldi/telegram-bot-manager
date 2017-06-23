@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { browserHistory } from 'react-dom';
 import { Button, Panel } from 'react-bootstrap';
 import './style/login.css';
 

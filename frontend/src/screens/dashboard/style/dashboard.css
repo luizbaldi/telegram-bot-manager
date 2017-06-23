@@ -5,9 +5,19 @@ header {
 
 .list-chats {
 	height: 90vh;
+	overflow-y: auto;
 }
 
 .current-chat {
 	background-color: #e0e0e0;
-	height: 90vh;
+	height: 80vh;
+	overflow-y: auto;
+}
+
+.input-message {
+	height: 10vh;
+}
+
+.parent-dashboard {
+	overflow: hidden;
 }

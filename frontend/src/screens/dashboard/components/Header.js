@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Row } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Header = ({onSendMessage}) => {
@@ -14,7 +14,6 @@ const Header = ({onSendMessage}) => {
 				<Link to='/'>
 					<Button style={logoutButtonStyle}>Logout</Button>
 				</Link>
-				<Button onClick={onSendMessage} style={logoutButtonStyle}>Send random message to bot</Button>
 			</header>
 		</Col>
 	)

@@ -17,8 +17,8 @@ let wsServer = new WebSocketServer({
 });
 
 // Messages and client
-let history = [];
 let currentUserId = false;
+let currentConnection = false;
 
 // Helper functions
 let htmlEntities = (str) => {
@@ -31,39 +31,17 @@ wsServer.on('request', request => {
 	console.log((new Date()) + ' Connection from origin ' + request.origin + '.');
 
 	// Handling websocket requests
-	let connection = request.accept(null, request.origin);
+	currentConnection = request.accept(null, request.origin);
 
 	console.log((new Date()) + ' Connection accepted.');
 
-	// Sent back chat history
-	if (history.length > 0) {
-		connection.sendUTF(JSON.stringify({
-			type: 'history',
-			data: history
-		}));
-	}
-
-	// User sent new message
-	connection.on('message', message => {
+	// Handle manager panel message
+	currentConnection.on('message', message => {
 		if (message.type === 'utf8') {
 			if (currentUserId) {
 				console.log((new Date()) + ' User connected and ready to receive messages.');
 
-				// Kepping history of all sent messages
-				let currentMessageData = {
-					time: (new Date()).getTime(),
-					text: htmlEntities(message.utf8Data),
-					userId: currentUserId
-				};
-				history.push(currentMessageData);
-				history.slice(-100);
-
-				// Broadcast message to all connected clients
-				let messageDataToSend = JSON.stringify({
-					type: 'message',
-					data: currentMessageData
-				});
-				connection.sendUTF(messageDataToSend);
+				// Send message from manager to bot
 				bot.sendMessage(currentUserId, message.utf8Data);
 			} else {
 				console.log("User not connected to bot.");
@@ -72,16 +50,34 @@ wsServer.on('request', request => {
 	});
 
 	// User disconnected
-	connection.on('close', () => {
+	currentConnection.on('close', () => {
 		console.log('Closing browser connection.');
 	});
 });
 
 // Telegram Bot
 bot.on("message", message => {
-	if (message.text == '/start') {
-		currentUserId = message.chat.id; 
+	currentUserId = message.chat.id; 
+	if (message.text === '/start') {
 		bot.sendMessage(currentUserId, "Bot Connected! Hello :)");
 		console.log((new Date()) + ' User connected to bot. UserId: ' + currentUserId);
+	} else {
+		if (currentConnection) {
+			// Send message from bot to manager
+			let messageData = {
+				user: message.from,
+				message: message.text,
+				date: message.date
+			};
+			let messageDataToSend = JSON.stringify({
+				type: 'message',
+				data: messageData
+			});
+			currentConnection.sendUTF(messageDataToSend);
+			console.log('Message received!');
+			// bot.sendMessage(currentUserId, "Message received!");
+		} else {
+			console.log('Socket not connected.');
+		}	
 	}
 });
