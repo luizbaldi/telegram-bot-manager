@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
+import FacebookLogin from 'react-facebook-login';
 import './style/login.css';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 
-		this.doFacebookLogin = this.doFacebookLogin.bind(this);
+		this.responseFacebook = this.responseFacebook.bind(this);
 	}
-	doFacebookLogin() {
+	responseFacebook(response) {
 		console.log('Facebook login here');
 		this.props.history.push('/dashboard');
 	}
@@ -18,9 +19,11 @@ class Login extends Component {
 				<Panel className="vertically-center text-center">
 					<h4>Telegram Bot Manager</h4>
 					<hr />
-					<Button bsSize="large" bsStyle="primary" onClick={this.doFacebookLogin}>
-						Acesss Via Facebook
-					</Button>
+					<FacebookLogin
+				        appId="1504945156236072"
+				        autoLoad={true}
+				        fields="name,email,picture"
+				        callback={this.responseFacebook} />
 				</Panel>
 			</div>
 		);

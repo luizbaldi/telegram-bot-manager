@@ -7,9 +7,15 @@ const port = 3001;
 const token = '356322401:AAEy_gOSIc6Vcz5nLWbrMfIz6-HhQGq252c';
 let bot = new TelegramBot(token, {polling: true});
 
-let server = http.createServer((request, response) => {});
+let server = http.createServer((request, response) => {
+	var url = request.url;
 
-server.listen(port, function() { });
+	if (url == '/login') {
+		// Save login data here
+	}
+});
+
+server.listen(port);
 
 // WebSocket Server
 let wsServer = new WebSocketServer({
