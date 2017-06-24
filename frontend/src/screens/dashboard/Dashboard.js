@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import ListChats from './components/ListChats';
 import CurrentChat from './components/CurrentChat';
+import DashboardWebSocket from './components/DashboardWebSocket'
 import './style/dashboard.css';
 
 class Dashboard extends Component {
@@ -9,31 +10,14 @@ class Dashboard extends Component {
 		super(props);
 
 		this.state = {
-			connection: false,
 			chats: [],
-			selectedChat: false
+			selectedChat: false,
+			messageToSent: false
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
 		this.handleReceivedMessage = this.handleReceivedMessage.bind(this);
 		this.selectChat = this.selectChat.bind(this);
-	}
-	componentDidMount() {
-		let connection = new WebSocket('ws://127.0.0.1:3001');
-
-		connection.onerror = (error) => {
-			alert("Error: Couldn't connect to socket.");
-			this.props.history.push('/');
-		};
-
-		connection.onmessage = (message) => {
-			message = JSON.parse(message.data);
-			this.handleReceivedMessage(message.data);
-		};
-
-		this.setState({
-			connection: connection
-		});
 	}
 	handleReceivedMessage(messageData) {
 		let chats = this.state.chats;
@@ -63,12 +47,11 @@ class Dashboard extends Component {
 
 		this.setState({
 			chats: chats,
-			connection: this.state.connection,
-			selectedChat: this.selectedChat
+			selectedChat: this.selectedChat,
+			messageToSent: false
 		});
 	}
 	sendMessage(message) {
-		let connection = this.state.connection;
 		let chats = this.state.chats;
 		let currentUserId = this.state.selectedChat.userId;
 
@@ -80,23 +63,22 @@ class Dashboard extends Component {
 
 		this.setState({
 			chats: chats,
-			connection: this.state.connection,
-			selectedChat: this.state.selectedChat
+			selectedChat: this.state.selectedChat,
+			messageToSent: message
 		});
-
-		connection.send(message);
 	};
 	selectChat(selectedChat) {
 		this.setState({
 			chats: this.state.chats,
 			selectedChat: selectedChat,
-			connection: this.state.connection
+			messageToSent: false
 		});
 	}
 	render() {
 		return (
 			<div>
 				<Header />
+				<DashboardWebSocket url="ws://127.0.0.1:3001" onMessageReceived={this.handleReceivedMessage} message={this.state.messageToSent} />
 				<ListChats chats={this.state.chats} onChatClick={this.selectChat} />
 				<CurrentChat chat={this.state.selectedChat} onSendMessage={this.sendMessage}/>
 			</div>

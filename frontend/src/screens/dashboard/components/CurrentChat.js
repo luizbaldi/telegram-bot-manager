@@ -7,6 +7,14 @@ class CurrentChat extends Component {
 		super(props);
 	}
 	render() {
+		let userMessageStyle = {
+		    border: '2px solid #a7a7a7'
+		};
+
+		let managerMessageStyle = {
+		    border: '2px solid #7bad7b',
+    		backgroundColor: '#cbffcb'
+		};
 		return(
 			<Col xs={9} className="parent-dashboard">
 				<div className="current-chat">
@@ -15,12 +23,16 @@ class CurrentChat extends Component {
 							return (
 								<div key={"panelMessage_" + index}>
 									{ message.type === 'user' ?
-										<Col xs={4} xsOffset={8}>
-											<Well className="pull-right">{message.text}</Well>
-										</Col>
-										: <Col xs={4} >
-											<Well className="pull-left">{message.text}</Well>
-										</Col>
+										<Row>
+											<Col xs={4} xsOffset={8}>
+												<Well className="pull-right" style={userMessageStyle}>{message.text}</Well>
+											</Col>
+										</Row>
+										: <Row>
+											<Col xs={4}>
+												<Well className="pull-left" style={managerMessageStyle}>{message.text}</Well>
+											</Col>
+										</Row>
 									}
 								</div>
 							);
