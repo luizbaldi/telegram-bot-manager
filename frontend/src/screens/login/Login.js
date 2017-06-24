@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import './style/login.css';
 

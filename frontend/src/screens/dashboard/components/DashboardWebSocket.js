@@ -12,14 +12,15 @@ class DashboardWebSocket extends Component {
 	}
 	componentDidMount() {
 		let websocket = this.state.websocket;
+		let onMessageReceived = this.props.onMessageReceived;
+
 		websocket.onerror = (error) => {
 			alert("Error: Couldn't connect to socket.");
-			this.props.history.push('/');
 		};
 
 		websocket.onmessage = (message) => {
 			message = JSON.parse(message.data);
-			this.props.onMessageReceived(message.data);
+			onMessageReceived(message.data);
 		};
 
 		this.setState({

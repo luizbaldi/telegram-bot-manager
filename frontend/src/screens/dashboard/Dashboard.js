@@ -47,7 +47,7 @@ class Dashboard extends Component {
 
 		this.setState({
 			chats: chats,
-			selectedChat: this.selectedChat,
+			selectedChat: this.state.selectedChat,
 			messageToSent: false
 		});
 	}
@@ -56,15 +56,21 @@ class Dashboard extends Component {
 		let currentUserId = this.state.selectedChat.userId;
 
 		let currentChat = chats.filter(chat => chat.userId === currentUserId).shift();
+		// Saves message history
 		currentChat.messages.push({
 			type: 'manager',
 			text: message
 		});
 
+		let messageToSent = {
+			userId: currentUserId,
+			message: message
+		};
+
 		this.setState({
 			chats: chats,
 			selectedChat: this.state.selectedChat,
-			messageToSent: message
+			messageToSent: JSON.stringify(messageToSent)
 		});
 	};
 	selectChat(selectedChat) {
@@ -78,7 +84,10 @@ class Dashboard extends Component {
 		return (
 			<div>
 				<Header />
-				<DashboardWebSocket url="ws://127.0.0.1:3001" onMessageReceived={this.handleReceivedMessage} message={this.state.messageToSent} />
+				<DashboardWebSocket
+					url="ws://127.0.0.1:3001"
+					onMessageReceived={this.handleReceivedMessage}
+					message={this.state.messageToSent} />
 				<ListChats chats={this.state.chats} onChatClick={this.selectChat} />
 				<CurrentChat chat={this.state.selectedChat} onSendMessage={this.sendMessage}/>
 			</div>

@@ -11,6 +11,7 @@ class InputMessage extends Component {
 
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.sendMessage = this.sendMessage.bind(this);
+		this.preventPageReload = this.preventPageReload.bind(this);
 	}
 	handleTextChange(event) {
 		this.setState({
@@ -24,22 +25,32 @@ class InputMessage extends Component {
 			message: ''
 		});
 	}
+	preventPageReload(event) {
+		event.preventDefault();
+	}
 	render() {
 		return (
-			<form>
+			<form onSubmit={this.preventPageReload}>
 				<FormGroup>
-						<Col xs={10}>
-				      		<FormControl
-				      			type="text"
-				      			placeholder="Normal text"
-				      			disabled={this.props.hasToDisable}
-				      			onChange={this.handleTextChange} />
-						</Col>
-						<Col xs={2}>
-							<Button type="button" block disabled={this.props.hasToDisable} onClick={() => this.sendMessage(this.state.message)}>Send</Button>
-						</Col>
+					<Col xs={10}>
+			      		<FormControl
+			      			type="text"
+			      			placeholder="Type your message here"
+			      			disabled={this.props.hasToDisable}
+			      			onChange={this.handleTextChange}
+			      			value={this.state.message} />
+					</Col>
+					<Col xs={2}>
+						<Button
+							type="submit" block
+							bsStyle={this.props.hasToDisable ? "default" : "primary"}
+							disabled={this.props.hasToDisable}
+							onClick={() => this.sendMessage(this.state.message)}>
+								Send
+							</Button>
+					</Col>
 			    </FormGroup>
-			</form>
+		    </form>
 		);
 	}
 }

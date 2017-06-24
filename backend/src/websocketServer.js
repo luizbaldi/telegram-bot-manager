@@ -44,14 +44,11 @@ wsServer.on('request', request => {
 	// Handle manager panel message
 	currentConnection.on('message', message => {
 		if (message.type === 'utf8') {
-			if (currentUserId) {
-				console.log((new Date()) + ' User connected and ready to receive messages.');
+			console.log((new Date()) + ' User connected and ready to receive messages.');
 
-				// Send message from manager to bot
-				bot.sendMessage(currentUserId, message.utf8Data);
-			} else {
-				console.log("User not connected to bot.");
-			}
+			let currentMessage = JSON.parse(message.utf8Data);
+			// Send message from manager to bot
+			bot.sendMessage(currentMessage.userId, currentMessage.message);
 		}
 	});
 
