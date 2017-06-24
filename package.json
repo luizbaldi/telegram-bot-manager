@@ -2,7 +2,7 @@
   "name": "telegram-bot-manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://luizbaldi.github.io/telegram-bot-manager/frontend/build",
+  "homepage": "https://luizbaldi.github.io/telegram-bot-manager",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",
