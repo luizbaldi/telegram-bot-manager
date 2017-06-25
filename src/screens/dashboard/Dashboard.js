@@ -85,7 +85,7 @@ class Dashboard extends Component {
 			<div>
 				<Header />
 				<DashboardWebSocket
-					url="ws://127.0.0.1:3001"
+					url="ws://telegram-bot-manager.herokuapp.com/"
 					onMessageReceived={this.handleReceivedMessage}
 					message={this.state.messageToSent} />
 				<ListChats chats={this.state.chats} onChatClick={this.selectChat} />
