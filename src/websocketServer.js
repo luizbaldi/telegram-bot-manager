@@ -1,7 +1,7 @@
 let TelegramBot = require('node-telegram-bot-api');
 let WebSocketServer = require('websocket').server;
 let http = require('http');
-const port = 3001;
+const port = (process.env.PORT || 5000);
 
 // Telegram bot data
 const token = '356322401:AAEy_gOSIc6Vcz5nLWbrMfIz6-HhQGq252c';
@@ -15,7 +15,9 @@ let server = http.createServer((request, response) => {
 	}
 });
 
-server.listen(port);
+server.listen(port, () => {
+	console.log("Http server listening on: " + port);
+});
 
 // WebSocket Server
 let wsServer = new WebSocketServer({
@@ -60,7 +62,7 @@ wsServer.on('request', request => {
 
 // Telegram Bot
 bot.on("message", message => {
-	currentUserId = message.chat.id; 
+	currentUserId = message.chat.id;
 	if (message.text === '/start') {
 		bot.sendMessage(currentUserId, "Bot Connected! Hello :)");
 		console.log((new Date()) + ' User connected to bot. UserId: ' + currentUserId);
@@ -81,6 +83,6 @@ bot.on("message", message => {
 			// bot.sendMessage(currentUserId, "Message received!");
 		} else {
 			console.log('Socket not connected.');
-		}	
+		}
 	}
 });
