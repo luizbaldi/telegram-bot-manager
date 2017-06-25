@@ -1,5 +1,6 @@
 # Telegram Bot Manager
 Simple Telegram bot manager, with a user interface built in ReactJS for frontend and NodeJS for backend.
+The project is hosted in GitHub Pages with the server running in Heroku.
 
 ## Setting up the environment
 To prepare your project:
@@ -9,6 +10,7 @@ run
 ```sh
 cd frontend/
 npm install
+npm start
 ```
 
 Backend:
@@ -17,6 +19,10 @@ run
 cd backend/
 npm install
 ```
+
+## Demo
+https://luizbaldi.github.io/telegram-bot-manager/#/
+Obs: If the page shows an error on console, click on the shield on the browser url and allow scripts.
 
 ## References
 
