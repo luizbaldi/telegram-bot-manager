@@ -23,10 +23,13 @@ npm start
 
 ## Demo
 https://luizbaldi.github.io/telegram-bot-manager/#/
+
 Obs: If the page shows an error on console, click on the shield on the browser url and allow scripts.
 
-## References
+## Bot name
+Simple Manager
 
+## References
 Creating Telegram Bot:
 https://blog.srnd.org/intro-to-node-js-making-a-telegram-bot-964b8cfe1129
 https://picoledelimao.github.io/blog/2016/01/22/creating-a-telegram-bot-in-nodejs/
