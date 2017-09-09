@@ -3,20 +3,26 @@ import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Header = ({onSendMessage}) => {
-	let logoutButtonStyle = {
-		margin: '15px',
-		float: 'right'
-	};
-
 	return (
 		<Col xs={12}>
-			<header>
+			<header style={style.header}>
 				<Link to='/'>
-					<Button style={logoutButtonStyle}>Logout</Button>
+					<Button style={style.logoutButtonStyle}>Logout</Button>
 				</Link>
 			</header>
 		</Col>
 	)
+};
+
+const style = {
+	header: {
+		height: '10vh',
+		backgroundColor: '#30b6f8'
+	},
+	logoutButtonStyle: {
+		margin: '15px',
+		float: 'right'
+	}
 }
 
 export default Header;

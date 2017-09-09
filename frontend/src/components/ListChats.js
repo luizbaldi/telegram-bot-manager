@@ -13,8 +13,8 @@ class ListChats extends Component {
 	}
 	render() {
 		return (
-			<Col xs={3} className="parent-dashboard">
-				<div className="list-chats text-center">
+			<Col xs={3} style={style.container}>
+				<div style={style.listChats}>
 					{ this.props.chats.length > 0
 						? this.props.chats.map((chat, index) => {
 							return (
@@ -32,6 +32,17 @@ class ListChats extends Component {
 				</div>
 			</Col>
 		)
+	}
+};
+
+const style = {
+	container: {
+		overflow: 'hidden'
+	},
+	listChats: {
+		height: '90vh',
+		overflowY: 'auto',
+		textAlign: 'center'
 	}
 }
 

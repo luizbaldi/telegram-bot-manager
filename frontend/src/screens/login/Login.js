@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
-import FacebookLogin from 'react-facebook-login';
-import './style/login.css';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 
-		this.responseFacebook = this.responseFacebook.bind(this);
+		this.doLogin = this.doLogin.bind(this);
 	}
-	responseFacebook(response) {
-		console.log('Facebook login here');
+	doLogin(response) {
 		this.props.history.push('/dashboard');
 	}
 	render() {
 		return (
-			<div className="login-container text-center">
-				<Panel className="vertically-center text-center">
+			<div style={style.loginContainer}>
+				<Panel style={style.panel}>
 					<h4>Telegram Bot Manager</h4>
 					<hr />
-					<FacebookLogin
-				        appId="1504945156236072"
-				        autoLoad={true}
-				        fields="name,email,picture"
-				        callback={this.responseFacebook} />
+					<button onClick={this.doLogin}>Login</button>
 				</Panel>
 			</div>
 		);
 	};
 };
+
+const style = {
+	loginContainer: {
+		backgroundColor: '#30b6f8',
+		height: '100vh',
+		width: '100%',
+		textAlign: 'center'
+	},
+	panel: {
+		width: '30%',
+		height: '20vh',
+		display: 'inline-block',
+		textAlign: 'center',
+		position: 'relative',
+		top: '50%',
+		transform: 'translateY(-50%)'
+	}
+}
 
 export default Login;
