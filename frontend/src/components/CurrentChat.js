@@ -5,7 +5,7 @@ import InputMessage from './InputMessage';
 const CurrentChat = ({chat, onSendMessage}) => {
 	return (
 		<Col xs={9} style={style.container}>
-			<div style={style.currentChat} style={style.chatContainer}>
+			<div style={style.chatContainer}>
 				{ chat ?
 					chat.messages.map((message, index) => {
 						return (
@@ -50,9 +50,7 @@ const style = {
 	},
 	chatContainer: {
 		padding: '15px 20px',
-		height: '80vh'
-	},
-	currentChat: {
+		height: '80vh',
 		backgroundColor: '#e0e0e0',
 		overflowY: 'auto'
 	}

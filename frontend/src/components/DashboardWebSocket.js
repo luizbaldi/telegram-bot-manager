@@ -39,9 +39,11 @@ class DashboardWebSocket extends Component {
 		}
 	}
 	render() {
-		return <div>
-			{this.sendMessage()}
-		</div>
+		return (
+			<div>
+				{this.sendMessage()}
+			</div>
+		);
 	}
 }
 
