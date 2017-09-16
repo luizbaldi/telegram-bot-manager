@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Header from '../../components/Header';
-import ListChats from '../../components/ListChats';
-import CurrentChat from '../../components/CurrentChat';
-import DashboardWebSocket from '../../components/DashboardWebSocket'
+import Header from '../components/Header';
+import ListChats from '../components/ListChats';
+import CurrentChat from '../components/CurrentChat';
+import DashboardWebSocket from '../components/DashboardWebSocket';
 
-class Dashboard extends Component {
+class DashboardScreen extends Component {
 	constructor(props) {
 		super(props);
 
@@ -94,4 +94,4 @@ class Dashboard extends Component {
 	}
 }
 
-export default Dashboard;
+export default DashboardScreen;

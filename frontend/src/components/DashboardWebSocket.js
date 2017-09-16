@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import swal from 'sweetalert2';
 
 class DashboardWebSocket extends Component {
 	constructor(props) {
@@ -15,7 +16,12 @@ class DashboardWebSocket extends Component {
 		let onMessageReceived = this.props.onMessageReceived;
 
 		websocket.onerror = (error) => {
-			alert("Error: Couldn't connect to socket.");
+			swal("Error: .");
+			swal(
+				'Ops...',
+				'Couldn\'t connect to socket, check your project settings.',
+				'error'
+			  )
 		};
 
 		websocket.onmessage = (message) => {

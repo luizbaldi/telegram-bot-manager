@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 
-class Login extends Component {
+class LoginScreen extends Component {
 	constructor(props) {
 		super(props);
 
@@ -41,4 +41,4 @@ const style = {
 	}
 }
 
-export default Login;
+export default LoginScreen;

@@ -5,10 +5,12 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "css-reset": "0.0.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "sweetalert2": "^6.8.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
