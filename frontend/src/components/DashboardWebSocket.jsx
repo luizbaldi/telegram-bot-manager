@@ -6,23 +6,26 @@ class DashboardWebSocket extends Component {
 		super(props);
 
 		this.state = {
-			websocket: new WebSocket(this.props.url)
+			websocket: new WebSocket(this.props.url),
+			isBotOnline: props.isBotOnline
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
+		this.onWebsocketError = this.onWebsocketError.bind(this);
+	}
+	onWebsocketError() {
+		swal(
+			'Ops...',
+			'Couldn\'t connect to socket, check your project settings.',
+			'error'
+		);
+		this.props.updateBotStatus(false);
 	}
 	componentDidMount() {
 		let websocket = this.state.websocket;
 		let onMessageReceived = this.props.onMessageReceived;
 
-		websocket.onerror = (error) => {
-			swal("Error: .");
-			swal(
-				'Ops...',
-				'Couldn\'t connect to socket, check your project settings.',
-				'error'
-			  )
-		};
+		websocket.onerror = this.onWebsocketError;
 
 		websocket.onmessage = (message) => {
 			message = JSON.parse(message.data);

@@ -11,12 +11,14 @@ class DashboardScreen extends Component {
 		this.state = {
 			chats: [],
 			selectedChat: false,
-			messageToSent: false
+			messageToSent: false,
+			isBotOnline: true
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
 		this.handleReceivedMessage = this.handleReceivedMessage.bind(this);
 		this.selectChat = this.selectChat.bind(this);
+		this.updateBotStatus = this.updateBotStatus.bind(this);
 	}
 	handleReceivedMessage(messageData) {
 		let chats = this.state.chats;
@@ -79,14 +81,21 @@ class DashboardScreen extends Component {
 			messageToSent: false
 		});
 	}
+	updateBotStatus(status) {
+		this.setState({
+			isBotOnline: status
+		});
+	}
 	render() {
 		return (
 			<div>
-				<Header />
+				<Header isBotOnline={this.state.isBotOnline} />
 				<DashboardWebSocket
 					url="ws://127.0.0.1:3001"
 					onMessageReceived={this.handleReceivedMessage}
-					message={this.state.messageToSent} />
+					message={this.state.messageToSent} 
+					updateBotStatus={this.updateBotStatus}
+				/>
 				<ListChats chats={this.state.chats} onChatClick={this.selectChat} />
 				<CurrentChat chat={this.state.selectedChat} onSendMessage={this.sendMessage}/>
 			</div>

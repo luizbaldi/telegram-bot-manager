@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, Button } from 'react-bootstrap';
 
 class LoginScreen extends Component {
 	constructor(props) {
@@ -16,7 +16,8 @@ class LoginScreen extends Component {
 				<Panel style={style.panel}>
 					<h4>Telegram Bot Manager</h4>
 					<hr />
-					<button onClick={this.doLogin}>Login</button>
+					{/* <button >Login</button> */}
+					<Button onClick={this.doLogin} bsStyle="primary" block>Login</Button>
 				</Panel>
 			</div>
 		);
