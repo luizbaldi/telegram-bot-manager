@@ -1,59 +1,56 @@
-import React, { Component } from 'react';
-import swal from 'sweetalert2';
+/* global WebSocket */
+import React, { Component } from 'react'
+import swal from 'sweetalert2'
 
 class DashboardWebSocket extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props)
 
-		this.state = {
-			websocket: new WebSocket(this.props.url),
-			isBotOnline: props.isBotOnline
-		};
+    this.sendMessage = this.sendMessage.bind(this)
+    this.onWebsocketError = this.onWebsocketError.bind(this)
+  }
 
-		this.sendMessage = this.sendMessage.bind(this);
-		this.onWebsocketError = this.onWebsocketError.bind(this);
-	}
-	onWebsocketError() {
-		swal(
-			'Ops...',
-			'Couldn\'t connect to socket, check your project settings.',
-			'error'
-		);
-		this.props.updateBotStatus(false);
-	}
-	componentDidMount() {
-		let websocket = this.state.websocket;
-		let onMessageReceived = this.props.onMessageReceived;
+  componentDidMount() {
+    const websocket = new WebSocket(this.props.url)
+    const { onMessageReceived } = this.props
 
-		websocket.onerror = this.onWebsocketError;
+    websocket.onerror = this.onWebsocketError
 
-		websocket.onmessage = (message) => {
-			message = JSON.parse(message.data);
-			onMessageReceived(message.data);
-		};
+    websocket.onmessage = (message) => {
+      const messageData = JSON.parse(message.data).data
+      onMessageReceived(messageData)
+    }
 
-		this.setState({
-			websocket: websocket
-		});
-	}
-	componentWillUnmount() {
-		let websocket = this.state.websocket;
-		websocket.close();
-	}
-	sendMessage() {
-		let message = this.props.message;
-		if (message) {
-			this.state.websocket.send(message);
-			message = false;
-		}
-	}
-	render() {
-		return (
-			<div>
-				{this.sendMessage()}
-			</div>
-		);
-	}
+    this.websocket = websocket
+  }
+  componentWillUnmount() {
+    this.websocket.close()
+  }
+
+  onWebsocketError() {
+    swal(
+      'Ops...',
+      'Couldn\'t connect to socket, check your project settings.',
+      'error'
+    )
+    this.props.updateBotStatus(false)
+  }
+
+  sendMessage() {
+    let { message } = this.props
+    if (message) {
+      this.websocket.send(message)
+      message = false
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.sendMessage()}
+      </div>
+    )
+  }
 }
 
-export default DashboardWebSocket;
+export default DashboardWebSocket

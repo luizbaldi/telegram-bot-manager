@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import DashboardScreen from './DashboardScreen';
-import LoginScreen from './LoginScreen';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 /*
 * Styles
 */
-import 'css-reset/reset.css';
-import 'sweetalert2/dist/sweetalert2.css';
-import './app.css';
+import 'css-reset/reset.css'
+import 'sweetalert2/dist/sweetalert2.css'
+import './app.css'
 
-class App extends Component {
-    render() {
-        return (
-			<Switch>
-				<Route exact path='/' component={LoginScreen} />
-				<Route path='/dashboard' component={DashboardScreen} />
-			</Switch>
-        );
-    }
-}
+import DashboardScreen from './DashboardScreen'
+import LoginScreen from './LoginScreen'
 
-export default App;
+
+const App = () => (
+  <Switch>
+    <Route exact path="/" component={LoginScreen} />
+    <Route path="/dashboard" component={DashboardScreen} />
+  </Switch>
+)
+
+export default App
