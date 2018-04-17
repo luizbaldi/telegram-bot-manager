@@ -1,56 +1,50 @@
 import React from 'react'
-import { Col, Button, Tooltip } from 'react-bootstrap'
+import { Button, Tooltip } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
-const getBotStatusComponent = (isBotOnline) => {
-  let componentStyle
-  let text
-  if (isBotOnline) {
-    text = 'Online'
-    componentStyle = style.onlineLabel
-  } else {
-    text = 'Offline'
-    componentStyle = style.offlineLabel
-  }
-  return <span style={componentStyle}>{`${text}`}</span>
-}
+import styled from 'styled-components'
+import FullCol from './FullCol.styled.jsx'
 
 const Header = ({ isBotOnline }) => (
-  <Col xs={12}>
-    <header style={style.header}>
-      <Tooltip placement="right" className="in" id="tooltip-right" style={style.statusMessage}>
-        Status do bot: {getBotStatusComponent(isBotOnline)}
-      </Tooltip>
+  <FullCol xs={12}>
+    <StyledHeader>
+      <StatusMessage placement="right" className="in" id="tooltip-right">
+        Status do bot: { isBotOnline
+          ? <OnlineLabel>Online</OnlineLabel>
+          : <OfflineLabel>Offline</OfflineLabel>
+        }
+      </StatusMessage>
       <Link to="/">
-        <Button style={style.logoutButtonStyle}>Logout</Button>
+        <LogoutButton>Logout</LogoutButton>
       </Link>
-    </header>
-  </Col>
+    </StyledHeader>
+  </FullCol>
 )
 
-const style = {
-  header: {
-    height: '10vh',
-    backgroundColor: '#30b6f8'
-  },
-  logoutButtonStyle: {
-    margin: '15px',
-    float: 'right'
-  },
-  statusMessage: {
-    display: 'inline-block',
-    marginTop: '18px',
-    color: '#fafafa',
-    fontSize: '1em'
-  },
-  onlineLabel: {
-    fontWeight: 600,
-    color: '#00f542'
-  },
-  offlineLabel: {
-    fontWeight: 600,
-    color: '#ff3e3e'
-  }
-}
+const StyledHeader = styled.header`
+  height: 10vh;
+  background-color: #30b6f8;
+`
+
+const LogoutButton = styled(Button)`
+  margin: 15px;
+  float: right;
+`
+
+const StatusMessage = styled(Tooltip)`
+  display: inline-block;
+  margin-top: 18px;
+  color: #fafafa;
+  font-size: 1em;
+`
+
+const OnlineLabel = styled.span`
+  font-weight: 600;
+  color: #00f542;
+`
+
+const OfflineLabel = styled.span`
+  font-weight: 600;
+  color: #00f542;
+`
 
 export default Header

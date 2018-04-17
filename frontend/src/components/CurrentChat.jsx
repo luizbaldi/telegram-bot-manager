@@ -1,23 +1,25 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Col, Well, Row } from 'react-bootstrap'
 import InputMessage from './InputMessage'
+import FullCol from './FullCol.styled.jsx'
 
 const CurrentChat = ({ chat, onSendMessage }) => (
-  <Col xs={9} style={style.container}>
-    <div style={style.chatContainer}>
+  <Container xs={9}>
+    <ChatContainer>
       {chat ?
         chat.messages.map(message => (
           <div key={`panelMessage_${message.text.substr(0, 3)}`}>
             {message.type === 'user' ?
               <Row>
                 <Col xs={4} xsOffset={8}>
-                  <Well className="pull-right" style={style.userMessageStyle}>{message.text}</Well>
+                  <UserMessage className="pull-right">{message.text}</UserMessage>
                 </Col>
               </Row>
               : (
                 <Row>
                   <Col xs={4}>
-                    <Well className="pull-left" style={style.managerMessageStyle}>{message.text}</Well>
+                    <ManagerMessage className="pull-left">{message.text}</ManagerMessage>
                   </Col>
                 </Row>
               )
@@ -30,30 +32,31 @@ const CurrentChat = ({ chat, onSendMessage }) => (
           </Col>
         )
       }
-    </div>
+    </ChatContainer>
     <div>
       <InputMessage hasToDisable={!chat} onSendMessage={onSendMessage} />
     </div>
-  </Col>
+  </Container>
 )
 
-const style = {
-  container: {
-    overflow: 'hidden'
-  },
-  userMessageStyle: {
-    border: '1px solid #a7a7a7'
-  },
-  managerMessageStyle: {
-    border: '1px solid #7bad7b',
-    backgroundColor: '#cbffcb'
-  },
-  chatContainer: {
-    padding: '15px 20px',
-    height: '80vh',
-    backgroundColor: '#e0e0e0',
-    overflowY: 'auto'
-  }
-}
+const Container = styled(FullCol)`
+  overflow: hidden;
+`
+
+const ChatContainer = styled.div`
+  padding: 15px 20px;
+  height: 80vh;
+  background-color: #e0e0e0;
+  overflow-y: auto;
+`
+
+const UserMessage = styled(Well)`
+  border: 1px solid #a7a7a7;
+`
+
+const ManagerMessage = styled(Well)`
+  border: 1px solid #7bad7b;
+  background-color: #cbffcb;
+`
 
 export default CurrentChat

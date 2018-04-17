@@ -1,16 +1,18 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { injectGlobal } from 'styled-components'
 
-/*
-* Styles
-*/
-import 'css-reset/reset.css'
+/* Styles */
 import 'sweetalert2/dist/sweetalert2.css'
-import './app.css'
 
 import DashboardScreen from './DashboardScreen'
 import LoginScreen from './LoginScreen'
 
+injectGlobal([`
+  html, body {
+    height: 100%;
+  }
+`])
 
 const App = () => (
   <Switch>

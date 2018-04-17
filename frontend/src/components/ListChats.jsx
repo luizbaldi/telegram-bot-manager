@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Col, Panel } from 'react-bootstrap'
+import FullCol from './FullCol.styled.jsx'
 
 class ListChats extends Component {
   convertDate = (unixDateValue) => {
@@ -8,15 +9,17 @@ class ListChats extends Component {
   }
   render() {
     return (
-      <Col xs={3} style={style.container}>
+      <FullCol xs={3} style={style.container}>
         <div style={style.listChats}>
           {this.props.chats.length > 0
             ? this.props.chats.map(chat => (
-              <Col xs={12} key={`chatRow_${chat.lastUpdate}`}>
-                <Panel header={chat.user.first_name} onClick={() => this.props.onChatClick(chat)}>
-                  <i>Last Update: {this.convertDate(chat.lastUpdate)}</i>
+              <FullCol xs={12} key={`chatRow_${chat.lastUpdate}`}>
+                <Panel onClick={() => this.props.onChatClick(chat)}>
+                  <Panel.Heading>{chat.user.first_name}</Panel.Heading>
+                  <Panel.Body>{chat.messages[chat.messages.length - 1].text}</Panel.Body>
+                  <Panel.Footer>Last Message: {this.convertDate(chat.lastUpdate)}</Panel.Footer>
                 </Panel>
-              </Col>
+              </FullCol>
             ))
             : (
               <Col xs={12}>
@@ -25,7 +28,7 @@ class ListChats extends Component {
             )
           }
         </div>
-      </Col>
+      </FullCol>
     )
   }
 }
