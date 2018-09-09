@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
-import { Panel, Button } from 'react-bootstrap'
 import styled from 'styled-components'
+import Button from '../components/Button'
 
 class LoginScreen extends Component {
-  constructor(props) {
-    super(props)
 
-    this.doLogin = this.doLogin.bind(this)
-  }
-  doLogin() {
-    this.props.history.push('/dashboard')
-  }
+  doLogin = () => this.props.history.push('/dashboard')
+
   render() {
     return (
       <Container>
         <StyledPanel>
-          <h4>Telegram Bot Manager</h4>
+          <h2>Telegram Bot Manager</h2>
           <hr />
-          <Button onClick={this.doLogin} bsStyle="primary" block>Login</Button>
+          <Button onClick={this.doLogin}>Login</Button>
+          <SmallFooter>Yup there's no validation for now 😬</SmallFooter>
         </StyledPanel>
       </Container>
     )
   }
+
 }
 
 const Container = styled.div`
@@ -34,12 +31,19 @@ const Container = styled.div`
   justify-content: center;
 `
 
-const StyledPanel = styled(Panel)`
+const StyledPanel = styled.div`
   width: 30%;
-  height: 20vh;
   display: inline-block;
   text-align: center;
-  padding: 12px;
+  padding: 18px 22px;
+  background-color: #fafafa;
+  border-radius: 6px;
+`
+
+const SmallFooter = styled.small`
+  color: lightgrey;
+  margin-top: 4px;
+  display: block;
 `
 
 export default LoginScreen

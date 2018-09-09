@@ -1,8 +1,11 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
   "rules": {
-    "semi": ["error", "never"],
+    "semi": [2, "never"],
     "comma-dangle": ["error", "never"],
     "space-before-function-paren": "off",
     "react/prop-types": "off",
