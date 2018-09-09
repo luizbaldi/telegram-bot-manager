@@ -12,7 +12,7 @@ class LoginScreen extends Component {
         <StyledPanel>
           <h2>Telegram Bot Manager</h2>
           <hr />
-          <Button onClick={this.doLogin}>Login</Button>
+          <Button onClick={this.doLogin} block>Login</Button>
           <SmallFooter>Yup there's no validation for now 😬</SmallFooter>
         </StyledPanel>
       </Container>

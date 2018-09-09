@@ -5,22 +5,14 @@ import CurrentChat from '../components/CurrentChat'
 import DashboardWebSocket from '../components/DashboardWebSocket'
 
 class DashboardScreen extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      chats: [],
-      selectedChat: false,
-      messageToSent: false,
-      isBotOnline: true
-    }
-
-    this.sendMessage = this.sendMessage.bind(this)
-    this.handleReceivedMessage = this.handleReceivedMessage.bind(this)
-    this.selectChat = this.selectChat.bind(this)
-    this.updateBotStatus = this.updateBotStatus.bind(this)
+  state = {
+    chats: [],
+    selectedChat: false,
+    messageToSent: false,
+    isBotOnline: true
   }
-  handleReceivedMessage(messageData) {
+
+  handleReceivedMessage = (messageData) => {
     const { chats } = this.state
     const userExists = this.state.chats.some(chat => chat.userId === messageData.user.id)
 
@@ -50,7 +42,8 @@ class DashboardScreen extends Component {
       messageToSent: false
     })
   }
-  sendMessage(message) {
+
+  sendMessage = (message) => {
     const { chats } = this.state
     const currentUserId = this.state.selectedChat.userId
 
@@ -72,18 +65,21 @@ class DashboardScreen extends Component {
       messageToSent: JSON.stringify(messageToSent)
     })
   }
-  selectChat(selectedChat) {
+
+  selectChat = (selectedChat) => {
     this.setState({
       chats: this.state.chats,
       selectedChat,
       messageToSent: false
     })
   }
-  updateBotStatus(status) {
+
+  updateBotStatus = (status) => {
     this.setState({
       isBotOnline: status
     })
   }
+
   render() {
     return (
       <div>

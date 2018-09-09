@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({ children, onClick }) => (
-  <Container onClick={onClick}>
+const Button = ({ children, onClick, block }) => (
+  <Container onClick={onClick} block={block}>
     {children}
   </Container>
 )
@@ -12,6 +12,8 @@ const Container = styled.div`
   background-color: papayawhip;
   padding: 12px;
   border-radius: 2px;
+  display: ${({ block }) => block ? 'block' : 'inline-block'}
+  text-align: center;
 
   &:hover {
     background-color: palegoldenrod;

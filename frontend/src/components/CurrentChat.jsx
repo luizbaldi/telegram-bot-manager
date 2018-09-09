@@ -1,36 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Col, Well, Row } from 'react-bootstrap'
 import InputMessage from './InputMessage'
-import FullCol from './FullCol.styled.jsx'
 
 const CurrentChat = ({ chat, onSendMessage }) => (
-  <Container xs={9}>
+  <Container>
     <ChatContainer>
       {chat ?
         chat.messages.map(message => (
           <div key={`panelMessage_${message.text.substr(0, 3)}`}>
-            {message.type === 'user' ?
-              <Row>
-                <Col xs={4} xsOffset={8}>
-                  <UserMessage className="pull-right">{message.text}</UserMessage>
-                </Col>
-              </Row>
-              : (
-                <Row>
-                  <Col xs={4}>
-                    <ManagerMessage className="pull-left">{message.text}</ManagerMessage>
-                  </Col>
-                </Row>
-              )
+            {message.type === 'user'
+              ? <UserMessage>{message.text}</UserMessage>
+              : <ManagerMessage>{message.text}</ManagerMessage>
             }
           </div>
         ))
-        : (
-          <Col xs={12} className="text-center">
-            <h3>Select a chat to procced :)</h3>
-          </Col>
-        )
+        : <NoChatTitle>Select a chat to procced :)</NoChatTitle>
       }
     </ChatContainer>
     <div>
@@ -39,8 +23,11 @@ const CurrentChat = ({ chat, onSendMessage }) => (
   </Container>
 )
 
-const Container = styled(FullCol)`
+const Container = styled.div`
   overflow: hidden;
+  width: 80%;
+  display: inline-block;
+  height: 90vh;
 `
 
 const ChatContainer = styled.div`
@@ -50,13 +37,25 @@ const ChatContainer = styled.div`
   overflow-y: auto;
 `
 
-const UserMessage = styled(Well)`
+const UserMessage = styled.div`
   border: 1px solid #a7a7a7;
+  width: 30%;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #fafafa;
 `
 
-const ManagerMessage = styled(Well)`
+const ManagerMessage = styled.div`
   border: 1px solid #7bad7b;
   background-color: #cbffcb;
+  width: 30%;
+  padding: 12px;
+  border-radius: 4px;
+  float: right;
+`
+
+const NoChatTitle = styled.h3`
+  text-align: center;
 `
 
 export default CurrentChat

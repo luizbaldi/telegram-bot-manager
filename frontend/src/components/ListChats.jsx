@@ -1,47 +1,56 @@
 import React, { Component } from 'react'
-import { Col, Panel } from 'react-bootstrap'
-import FullCol from './FullCol.styled.jsx'
+import styled from 'styled-components'
 
 class ListChats extends Component {
   convertDate = (unixDateValue) => {
     const date = new Date(unixDateValue * 1000)
     return `${date.getHours()}:${date.getMinutes()}`
   }
+
   render() {
     return (
-      <FullCol xs={3} style={style.container}>
-        <div style={style.listChats}>
-          {this.props.chats.length > 0
-            ? this.props.chats.map(chat => (
-              <FullCol xs={12} key={`chatRow_${chat.lastUpdate}`}>
-                <Panel onClick={() => this.props.onChatClick(chat)}>
-                  <Panel.Heading>{chat.user.first_name}</Panel.Heading>
-                  <Panel.Body>{chat.messages[chat.messages.length - 1].text}</Panel.Body>
-                  <Panel.Footer>Last Message: {this.convertDate(chat.lastUpdate)}</Panel.Footer>
-                </Panel>
-              </FullCol>
-            ))
-            : (
-              <Col xs={12}>
-                <h5>No chats yet</h5>
-              </Col>
-            )
-          }
-        </div>
-      </FullCol>
+      <Container>
+        {this.props.chats.length > 0
+          ? this.props.chats.map(chat => (
+            <ChatBox
+              key={`chatRow_${chat.lastUpdate}`}
+              onClick={() => this.props.onChatClick(chat)}
+            >
+              <div>{chat.user.first_name}</div>
+              <div>{chat.messages[chat.messages.length - 1].text}</div>
+              <div>Last Message: {this.convertDate(chat.lastUpdate)}</div>
+            </ChatBox>
+          ))
+          : <NoChatTitle>No chats yet</NoChatTitle>
+        }
+      </Container>
     )
   }
 }
 
-const style = {
-  container: {
-    overflow: 'hidden'
-  },
-  listChats: {
-    height: '90vh',
-    overflowY: 'auto',
-    textAlign: 'center'
+/* Styled components */
+const Container = styled.div`
+  overflow: hidden;
+  height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  width: 20%;
+  display: inline-block;
+`
+
+const NoChatTitle = styled.h5`
+  text-align: center;
+`
+
+const ChatBox = styled.div`
+  padding: 12px 0px;
+  border-bottom: 1px solid grey;
+  transition: background-color .2s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    background-color: papayawhip;
   }
-}
+`
 
 export default ListChats

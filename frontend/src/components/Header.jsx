@@ -1,38 +1,40 @@
 import React from 'react'
-import { Button, Tooltip } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import FullCol from './FullCol.styled.jsx'
+import Button from './Button'
 
 const Header = ({ isBotOnline }) => (
-  <FullCol xs={12}>
-    <StyledHeader>
-      <StatusMessage placement="right" className="in" id="tooltip-right">
-        Status do bot: { isBotOnline
-          ? <OnlineLabel>Online</OnlineLabel>
-          : <OfflineLabel>Offline</OfflineLabel>
-        }
-      </StatusMessage>
-      <Link to="/">
-        <LogoutButton>Logout</LogoutButton>
-      </Link>
-    </StyledHeader>
-  </FullCol>
+  <StyledHeader>
+    <StatusMessage>
+      Status do bot:
+      { isBotOnline
+        ? <OnlineLabel> Online</OnlineLabel>
+        : <OfflineLabel> Offline</OfflineLabel>
+      }
+    </StatusMessage>
+    <Link to="/">
+      <LogoutButton>Logout</LogoutButton>
+    </Link>
+  </StyledHeader>
 )
 
 const StyledHeader = styled.header`
   height: 10vh;
   background-color: #30b6f8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
 `
 
 const LogoutButton = styled(Button)`
   margin: 15px;
   float: right;
+  width: 20px;
 `
 
-const StatusMessage = styled(Tooltip)`
+const StatusMessage = styled.div`
   display: inline-block;
-  margin-top: 18px;
   color: #fafafa;
   font-size: 1em;
 `

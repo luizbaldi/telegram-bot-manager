@@ -11,6 +11,8 @@ import LoginScreen from './screens/LoginScreen'
 injectGlobal([`
   html, body {
     height: 100%;
+    margin: 0;
+    font-family: monospace;
   }
 `])
 
