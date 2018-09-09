@@ -1,4 +1,4 @@
-let CurrentConnectionInterface = {
+const CurrentConnectionInterface = {
     currentConnection: false,
     setCurrentConnection(currentConnection) {
         this.currentConnection = currentConnection;
