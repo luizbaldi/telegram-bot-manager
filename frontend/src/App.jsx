@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 /* Styles */
 import 'sweetalert2/dist/sweetalert2.css'
@@ -8,19 +8,22 @@ import 'sweetalert2/dist/sweetalert2.css'
 import DashboardScreen from './screens/DashboardScreen'
 import LoginScreen from './screens/LoginScreen'
 
-injectGlobal([`
+const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     margin: 0;
     font-family: monospace;
   }
-`])
+`
 
 const App = () => (
-  <Switch>
-    <Route exact path="/" component={LoginScreen} />
-    <Route path="/dashboard" component={DashboardScreen} />
-  </Switch>
+  <Fragment>
+    <Switch>
+      <Route exact path="/" component={LoginScreen} />
+      <Route path="/dashboard" component={DashboardScreen} />
+    </Switch>
+    <GlobalStyle />
+  </Fragment>
 )
 
 export default App
